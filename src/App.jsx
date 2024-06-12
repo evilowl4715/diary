@@ -1,13 +1,11 @@
 import './App.css';
-import CardButton from './components/CardButton/CardButton';
 import Header from './components/Header/Header';
 import JournalAddButton from './components/JournalAddButton/JournalAddButton';
-import JournalItem from './components/JournalItem/JournalItem';
 import JournalList from './components/JournalList/JournalList';
 import Body from './layouts/Body/Body';
 import LeftPanel from './layouts/LeftPanel/LeftPanel';
 import JournalForm from './components/JournalForm/JournalForm';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 function App() {
 
@@ -32,7 +30,17 @@ function App() {
 		// }
 	];
 
-	const [items, setItems] = useState(INITIAL_DATA);
+	const [items, setItems] = useState([]);
+
+	useEffect(() => {
+		const data = JSON.parse(localStorage.getItem('data'));
+		if(data) {
+			setItems(data.map(item => ({
+				...item,
+				date: new Date(item.date)
+			})));
+		}
+	}, []);
 
 	const addItem = item => {
 		setItems(oldItems => [...oldItems, {
