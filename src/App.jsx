@@ -33,7 +33,7 @@ function App() {
 	const [items, setItems] = useState([]);
 
 	useEffect(() => {
-		const data = JSON.parse(localStorage.getItem('data'));
+		const data = JSON.parse( localStorage.getItem('data'));
 		if(data) {
 			setItems(data.map(item => ({
 				...item,
@@ -41,6 +41,13 @@ function App() {
 			})));
 		}
 	}, []);
+
+
+	useEffect(() => {
+		if(items.length) {
+			localStorage.setItem('data', JSON.stringify(items));
+		}
+	}, [items]);
 
 	const addItem = item => {
 		setItems(oldItems => [...oldItems, {
