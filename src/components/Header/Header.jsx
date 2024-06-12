@@ -1,5 +1,5 @@
 import { LogoIcon } from '../SvgIcons/SvgIcons';
-import './Header.css';
+import styles from './Header.module.css';
 
 function Header() {
 
@@ -7,7 +7,9 @@ function Header() {
 
 	return (
 		<div className="header">
-			<LogoIcon/>
+			<div className={styles.logo}>
+				<LogoIcon/>
+			</div>
 		</div>
 
 	);
