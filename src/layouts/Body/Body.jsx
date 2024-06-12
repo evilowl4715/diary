@@ -1,9 +1,9 @@
-import './Body.css';
+import stayles from './Body.module.css';
 
 function Body({children}) {
 
 	return (
-		<div className='body'>
+		<div className={stayles['body']}>
 			{children}
 		</div>
 	);
