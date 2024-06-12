@@ -48,9 +48,9 @@ function JournalForm({onSubmit}) {
 	return (
 		<>
 			<form className='journal-form' onSubmit={addJournalItem}>
-				<input type="text" name='title' style={{border: formValidState.title ? 'none' : '1px solid red'}}/>
-				<input type="date" name='date'  style={{border: formValidState.date ? 'none' : '1px solid red'}}/>
-				<textarea name="text" id="" style={{border: formValidState.text ? 'none' : '1px solid red'}}></textarea>
+				<input className={`input ${formValidState.title ? '' : 'invalid'}`} type="text" name='title'/>
+				<input className={`input ${formValidState.title ? '' : 'invalid'}`} type="date" name='date'/>
+				<textarea className={`input ${formValidState.title ? '' : 'invalid'}`} name="text" id="" ></textarea>
 				<Button onClick={() => {console.log('ggg');}} text="Сохранить"/>
 			</form>
 		</>

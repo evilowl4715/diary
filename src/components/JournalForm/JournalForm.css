@@ -5,3 +5,7 @@
     max-width: 300px;
     width: 100%;
 }
+
+.invalid {
+    border: 1px solid red;
+}
