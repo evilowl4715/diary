@@ -6,6 +6,7 @@ import Body from './layouts/Body/Body';
 import LeftPanel from './layouts/LeftPanel/LeftPanel';
 import JournalForm from './components/JournalForm/JournalForm';
 import { useLocalStorage } from './hooks/use-localstorage-hook';
+import { UserContext } from './context/user.context';
 
 function mapItems(items) {
 
@@ -20,26 +21,26 @@ function mapItems(items) {
 
 function App() {
 
-	const INITIAL_DATA = [
-		// {
-		// 	id: 1,
-		// 	title: 'Подготовка к обновлению курсов',
-		// 	text: 'Сегодня провёл весь день за...',
-		// 	date: new Date()
-		// },
-		// {
-		// 	id: 2,
-		// 	title: 'Test 1',
-		// 	text: 'lorem',
-		// 	date: new Date()
-		// },
-		// {
-		// 	id: 3,
-		// 	title: 'Test 2',
-		// 	text: 'lorem',
-		// 	date: new Date()
-		// }
-	];
+	// const INITIAL_DATA = [
+	// 	{
+	// 		id: 1,
+	// 		title: 'Подготовка к обновлению курсов',
+	// 		text: 'Сегодня провёл весь день за...',
+	// 		date: new Date()
+	// 	},
+	// 	{
+	// 		id: 2,
+	// 		title: 'Test 1',
+	// 		text: 'lorem',
+	// 		date: new Date()
+	// 	},
+	// 	{
+	// 		id: 3,
+	// 		title: 'Test 2',
+	// 		text: 'lorem',
+	// 		date: new Date()
+	// 	}
+	// ];
 
 	const [items, setItems] = useLocalStorage(['data']);
 
@@ -55,17 +56,19 @@ function App() {
 	};
 
 	return (
-		<div className="app">
-			<LeftPanel>
-				<Header changedUser={}/>
-				<JournalAddButton/>
-				<JournalList className="journal-list" items={mapItems(items)}/>
-			</LeftPanel>
+		<UserContext.Provider value={{userId: 1}}>
+			<div className="app">
+				<LeftPanel>
+					<Header/>
+					<JournalAddButton/>
+					<JournalList className="journal-list" items={mapItems(items)}/>
+				</LeftPanel>
 
-			<Body>
-				<JournalForm onSubmit={addItem}/>
-			</Body>
-		</div>
+				<Body>
+					<JournalForm onSubmit={addItem}/>
+				</Body>
+			</div>
+		</UserContext.Provider>
 	);
 }
 

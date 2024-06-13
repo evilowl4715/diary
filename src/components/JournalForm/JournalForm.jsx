@@ -5,6 +5,7 @@ import cn from 'classnames';
 import { DateIcon, FolderIcon } from '../SvgIcons/SvgIcons';
 import { INITIAL_STATE, formReducer } from './JournalForm.state';
 import Input from '../Input/Input';
+import { UserContext } from '../../context/user.context';
 
 function JournalForm({onSubmit}) {
 
@@ -66,38 +67,41 @@ function JournalForm({onSubmit}) {
 	};
 
 	return (
-		<>
-			<form className={styles['journal-form']} onSubmit={addJournalItem}>
-				<div className={styles['header-title']}>
-					<Input type="text" name='title' value={values.title} ref={titleRef} isValid={isValid.title} onChange={onChange} appearence='title'/>
+		<UserContext.Consumer>
+			{(context) => (
+				<form className={styles['journal-form']} onSubmit={addJournalItem}>
+					{context.userId}
+					<div className={styles['header-title']}>
+						<Input type="text" name='title' value={values.title} ref={titleRef} isValid={isValid.title} onChange={onChange} appearence='title'/>
 
-				</div>
-				<div className={cn(styles['input-block'], {
-					[styles['invalid']] : !isValid.date
-				})}>
-					<label htmlFor="date" className={styles['label-row']}>
-						<DateIcon/>
-						<span>Дата</span>
-					</label>
-					<Input type="date" name='date' value={values.date} ref={dateRef} isValid={isValid.date} onChange={onChange} appearence='input' id="date"/>
-				</div>
-				<div className={cn(styles['input-block'], {
-					[styles['invalid']] : !isValid.tag
-				})}>
-					<label htmlFor="tag" className={styles['label-row']}>
-						<FolderIcon/>
-						<span>Метки</span>
-					</label>
-					<Input type="text" name='tag' value={values.tag} ref={tagRef} isValid={isValid.tag} onChange={onChange} appearence='input' id="tag"/>
-				</div>
-				<div>
-					<textarea name="text" value={values.text} ref={textRef} onChange={onChange} className={cn(styles['textarea'], {
-						[styles['invalid']] : !isValid.text
-					})}></textarea>
-				</div>
-				<Button onClick={() => {console.log('ggg');}} text="Сохранить"/>
-			</form>
-		</>
+					</div>
+					<div className={cn(styles['input-block'], {
+						[styles['invalid']] : !isValid.date
+					})}>
+						<label htmlFor="date" className={styles['label-row']}>
+							<DateIcon/>
+							<span>Дата</span>
+						</label>
+						<Input type="date" name='date' value={values.date} ref={dateRef} isValid={isValid.date} onChange={onChange} appearence='input' id="date"/>
+					</div>
+					<div className={cn(styles['input-block'], {
+						[styles['invalid']] : !isValid.tag
+					})}>
+						<label htmlFor="tag" className={styles['label-row']}>
+							<FolderIcon/>
+							<span>Метки</span>
+						</label>
+						<Input type="text" name='tag' value={values.tag} ref={tagRef} isValid={isValid.tag} onChange={onChange} appearence='input' id="tag"/>
+					</div>
+					<div>
+						<textarea name="text" value={values.text} ref={textRef} onChange={onChange} className={cn(styles['textarea'], {
+							[styles['invalid']] : !isValid.text
+						})}></textarea>
+					</div>
+					<Button onClick={() => {console.log('ggg');}} text="Сохранить"/>
+				</form>
+			)}
+		</UserContext.Consumer>
 	);
 }
 
