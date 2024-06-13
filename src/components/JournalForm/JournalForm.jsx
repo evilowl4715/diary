@@ -4,6 +4,7 @@ import { useEffect, useReducer, useRef } from 'react';
 import cn from 'classnames';
 import { DateIcon, FolderIcon } from '../SvgIcons/SvgIcons';
 import { INITIAL_STATE, formReducer } from './JournalForm.state';
+import Input from '../Input/Input';
 
 function JournalForm({onSubmit}) {
 
@@ -68,9 +69,8 @@ function JournalForm({onSubmit}) {
 		<>
 			<form className={styles['journal-form']} onSubmit={addJournalItem}>
 				<div className={styles['header-title']}>
-					<input type="text" name='title' value={values.title} ref={titleRef} onChange={onChange} className={cn(styles['input-title'], {
-						[styles['invalid']] : !isValid.title
-					})}/>
+					<Input type="text" name='title' value={values.title} ref={titleRef} isValid={isValid.title} onChange={onChange} appearence='title'/>
+
 				</div>
 				<div className={cn(styles['input-block'], {
 					[styles['invalid']] : !isValid.date
@@ -79,7 +79,7 @@ function JournalForm({onSubmit}) {
 						<DateIcon/>
 						<span>Дата</span>
 					</label>
-					<input type="date" name='date' value={values.date} ref={dateRef} onChange={onChange} id="date" className={styles['input']}/>
+					<Input type="date" name='date' value={values.date} ref={dateRef} isValid={isValid.date} onChange={onChange} appearence='input' id="date"/>
 				</div>
 				<div className={cn(styles['input-block'], {
 					[styles['invalid']] : !isValid.tag
@@ -88,7 +88,7 @@ function JournalForm({onSubmit}) {
 						<FolderIcon/>
 						<span>Метки</span>
 					</label>
-					<input type="text" name='tag' value={values.tag} ref={tagRef} onChange={onChange} id="tag" className={styles['input']}/>
+					<Input type="text" name='tag' value={values.tag} ref={tagRef} isValid={isValid.tag} onChange={onChange} appearence='input' id="tag"/>
 				</div>
 				<div>
 					<textarea name="text" value={values.text} ref={textRef} onChange={onChange} className={cn(styles['textarea'], {
