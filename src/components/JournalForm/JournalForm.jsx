@@ -101,7 +101,7 @@ function JournalForm({onSubmit}) {
 					[styles['invalid']] : !isValid.text
 				})}></textarea>
 			</div>
-			<Button onClick={() => {console.log('ggg');}} text="Сохранить"/>
+			<Button onClick={() => {console.log('ggg');}}>Сохранить</Button>
 		</form>
 	);
 }
